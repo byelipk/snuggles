@@ -1,0 +1,206 @@
+DEBUG tests/libex30_tests.c:main:38: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:30: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:31: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:32: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:33: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:46: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:38: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:39: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:40: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:41: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:46: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:38: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:39: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:40: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:41: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:46: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:38: 
+----- test_dlopen
+[ERROR] (tests/libex30_tests.c:11: errno: No such file or directory) Failed to open the library to test.
+DEBUG tests/libex30_tests.c:main:46: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:38: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:39: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:40: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:41: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:70: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:62: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:63: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:72: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:66: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:67: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:72: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:64: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:65: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:66: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:67: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:74: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:66: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:67: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:68: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:69: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:80: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:66: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:67: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:68: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:69: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:all_tests:72: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:73: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:74: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:75: 
+----- test_dlclose
+DEBUG tests/libex30_tests.c:main:78: ----- RUNNING: ./tests/libex30_tests
+DEBUG tests/libex30_tests.c:all_tests:70: 
+----- test_dlopen
+DEBUG tests/libex30_tests.c:all_tests:71: 
+----- test_functions
+DEBUG tests/libex30_tests.c:all_tests:72: 
+----- test_failures
+DEBUG tests/libex30_tests.c:all_tests:73: 
+----- test_dlclose

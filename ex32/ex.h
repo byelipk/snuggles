@@ -1,0 +1,2 @@
+#define THING()\
+  1 +
