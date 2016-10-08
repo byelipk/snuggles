@@ -9,6 +9,6 @@ test/testparameterized.c.results
 test/testunity.c.results
 **/Unity/*
 *.o
+*.dSym/
 lcthw/tests/tests.log
-lcthw/tests/list_tests.dSYM/*
-lcthw/tests/list_tests
+*_tests
