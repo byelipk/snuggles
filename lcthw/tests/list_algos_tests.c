@@ -63,6 +63,20 @@ char *test_bubble_sort()
 
 char *test_merge_sort()
 {
+  List *words = create_words();
+
+  // should work on a list that needs sorting
+  List *res = List_merge_sort(words, (List_compare) strcmp);
+  mu_assert(is_sorted(res), "Words are not sorted after merge sort.");
+
+  // should work on an already sorted list
+  List *res2 = List_merge_sort(res, (List_compare) strcmp);
+  mu_assert(is_sorted(res), "Words should already be sorted.");
+
+  List_destroy(words);
+  List_destroy(res);
+  List_destroy(res2);
+
   return NULL;
 }
 
