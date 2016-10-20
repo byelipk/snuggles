@@ -8,45 +8,6 @@ inline void ListNode_swap(ListNode *a, ListNode *b)
   b->value = temp;
 }
 
-// ALGORITHM  BubbleSort(A[0..n - 1])
-//
-// Desc:   Sorts a given array by bubble sort,
-//         where n is the number of elements in the array.
-// Input:  A zero-index array of n orderable elements.
-// Output: Array A[0..n - 1] sorted in ascending order.
-//
-// for i <- 0 to n - 2 do
-//     for j <- 0 to n - 2 - i do
-//         if A[j + 1] < A[j]
-//             swap A[j] and A[j + 1]
-int Int_bubble_sort(int array[], int n)
-{
-  int i = 0;
-  int j = 0;
-
-  // NOTE
-  // If the array only contains one element, or it is empty,
-  // then it is sorted.
-  if (n <= 1) {
-    return 0;
-  }
-
-  // TODO
-  // If the bubble sort makes no exchanges on its pass through
-  // the algorithm can be stopped.
-  for (i = 0; i < (n - 1); i++) {        // outer loop
-    for (j = 0; j < (n - 1 - i); j++) {  // inner loop
-      if (array[j + 1] < array[j]) {     // swap
-        int temp = array[j];
-        array[j] = array[j + 1];
-        array[j + 1] = temp;
-      }
-    }
-  }
-
-  return 0;
-}
-
 int List_bubble_sort(List * list, List_compare cmp)
 {
   int sorted = 1;
@@ -137,3 +98,5 @@ List *List_merge_sort(List * list, List_compare cmp)
 
   return result;
 }
+
+

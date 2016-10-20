@@ -80,22 +80,22 @@ char *test_merge_sort()
   return NULL;
 }
 
-char *test_wiki_bubble_sort()
-{
-  // int array[] = { 3, 5, 4, 1, 2 };
-  int array[] = {1,2,3,4,5};
-  int count   = 5;
+/* char *test_wiki_bubble_sort() */
+/* { */
+/*   // int array[] = { 3, 5, 4, 1, 2 }; */
+/*   int array[] = {1,2,3,4,5}; */
+/*   int count   = 5; */
 
-  Int_bubble_sort(array, count);
+/*   Int_bubble_sort(array, count); */
 
-  mu_assert(array[0] == 1, "Bubble sort failed on array of numbers.");
-  mu_assert(array[1] == 2, "Bubble sort failed on array of numbers.");
-  mu_assert(array[2] == 3, "Bubble sort failed on array of numbers.");
-  mu_assert(array[3] == 4, "Bubble sort failed on array of numbers.");
-  mu_assert(array[4] == 5, "Bubble sort failed on array of numbers.");
+/*   mu_assert(array[0] == 1, "Bubble sort failed on array of numbers."); */
+/*   mu_assert(array[1] == 2, "Bubble sort failed on array of numbers."); */
+/*   mu_assert(array[2] == 3, "Bubble sort failed on array of numbers."); */
+/*   mu_assert(array[3] == 4, "Bubble sort failed on array of numbers."); */
+/*   mu_assert(array[4] == 5, "Bubble sort failed on array of numbers."); */
 
-  return NULL;
-}
+/*   return NULL; */
+/* } */
 
 char *all_tests()
 {
@@ -103,7 +103,6 @@ char *all_tests()
 
   mu_run_test(test_bubble_sort);
   mu_run_test(test_merge_sort);
-  mu_run_test(test_wiki_bubble_sort);
 
   return NULL;
 }
