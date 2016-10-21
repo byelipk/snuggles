@@ -198,6 +198,88 @@ char *test_can_handle_strings()
   return NULL;
 }
 
+char *test_first_last()
+{
+  DArray *array = DArray_create(sizeof(int), 5);
+
+  for (int i = 0; i < 5; i++) {
+    int *val = DArray_new(array);
+    *val = i;
+    // NOTE
+    // A bug occurs when we push elements into the array that
+    // have no been provisioned via DArray_new
+    DArray_push(array, val);
+  }
+
+  mu_assert(*(int *)DArray_first(array) == 0, "Expected 0.");
+  mu_assert(*(int *)DArray_last(array) == 4, "Expected 4.");
+
+  DArray_destroy(array);
+
+  return NULL;
+}
+
+
+char *test_last()
+{
+  DArray *array = DArray_create(sizeof(int), 5);
+
+  for (int i = 0; i < 5; i++) {
+    int val = i;
+    DArray_push(array, &val);
+  }
+
+  mu_assert(*(int *)DArray_last(array) == 4, "Expected 4.");
+
+  DArray_destroy(array);
+
+  return NULL;
+}
+
+char *test_end_count()
+{
+  DArray *array = DArray_create(sizeof(char), 5);
+
+  char *str1 = DArray_new(array);
+  char *str2 = DArray_new(array);
+
+  str1 = "Hello";
+  str2 = "World";
+
+  DArray_push(array, str1);
+  DArray_push(array, str2);
+
+  mu_assert(DArray_end(array) == 2, "Expected 2 (end).");
+  mu_assert(DArray_count(array) == 2, "Expected 2 (count).");
+
+  DArray_destroy(array);
+
+  return NULL;
+
+}
+
+char *test_max()
+{
+  DArray *array = DArray_create(sizeof(char), 2);
+
+  mu_assert(DArray_max(array) == 2, "Expected 2.");
+
+  char *str1 = DArray_new(array);
+  char *str2 = DArray_new(array);
+
+  str1 = "Hello";
+  str2 = "World";
+
+  DArray_push(array, str1);
+  DArray_push(array, str2);
+
+  mu_assert(DArray_max(array) == 302, "Expected 302.");
+
+  DArray_destroy(array);
+
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
@@ -215,6 +297,10 @@ char *all_tests()
   // my special tests
   mu_run_test(test_lifecycle);
   mu_run_test(test_can_handle_strings);
+
+  mu_run_test(test_first_last);
+  mu_run_test(test_end_count);
+  mu_run_test(test_max);
 
   return NULL;
 }
