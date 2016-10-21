@@ -1,4 +1,5 @@
 #include "minunit.h"
+#include <string.h>
 #include <lcthw/darray.h>
 
 static DArray *array = NULL;
@@ -160,6 +161,43 @@ char *test_lifecycle()
   return NULL;
 }
 
+char *test_can_handle_strings()
+{
+  char *str1 = "Hello";
+  char *str2 = "world";
+
+  // Create the array
+  DArray *strings = DArray_create(sizeof(char), 3);
+
+  // Add strings to the array
+  char *el1 = DArray_new(strings);
+  char *el2 = DArray_new(strings);
+
+  // Set values of new array elements 
+  el1 = str1;
+  el2 = str2;
+
+  // Push elements onto array
+  DArray_push(strings, el1);
+  DArray_push(strings, el2);
+
+  // Make some assertions
+  mu_assert(DArray_count(strings) == 2, "Wrong count.");
+  mu_assert(strcmp(DArray_get(strings, 0), str1) == 0, "Expected 'Hello'");
+  mu_assert(strcmp(DArray_get(strings, 1), str2) == 0, "Expected 'World'");
+
+  // Check this will work with const char *
+  DArray_push(strings, "AGAIN!");
+  mu_assert(DArray_count(strings) == 3, "Expected count == 3.");
+  mu_assert(strcmp(DArray_get(strings, 2), "AGAIN!") == 0, "Expected 'AGAIN!'");
+
+  // Destroy the array. We do not need to clear it because
+  // we're not storing the string data on the heap.
+  DArray_destroy(strings);
+
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
@@ -173,7 +211,10 @@ char *all_tests()
   mu_run_test(test_expand_contract);
   mu_run_test(test_push_pop);
   mu_run_test(test_destroy);
+
+  // my special tests
   mu_run_test(test_lifecycle);
+  mu_run_test(test_can_handle_strings);
 
   return NULL;
 }
