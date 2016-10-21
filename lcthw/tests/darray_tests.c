@@ -108,6 +108,58 @@ char *test_push_pop()
   return NULL;
 }
 
+char *test_lifecycle()
+{
+  size_t initial_max = 5;
+
+  // Create an array
+  DArray *numbers = DArray_create(sizeof(int), initial_max);
+
+  mu_assert(numbers->max == 5, "Expected max size to be 5.");
+
+  // Fill it with some numbers
+  for (int i = 0; i < 5; i++) {
+    int *val = DArray_new(numbers);
+    *val = i;
+    DArray_push(numbers, val);
+  }
+
+  mu_assert(numbers->max == 305, "Wrong max size.");
+
+  // Get the values
+  mu_assert(*(int *)DArray_get(numbers, 0) == 0, "Element 0 should equal 0.");
+  mu_assert(*(int *)DArray_get(numbers, 1) == 1, "Element 1 should equal 1.");
+  mu_assert(*(int *)DArray_get(numbers, 2) == 2, "Element 2 should equal 2.");
+  mu_assert(*(int *)DArray_get(numbers, 3) == 3, "Element 3 should equal 3.");
+  mu_assert(*(int *)DArray_get(numbers, 4) == 4, "Element 4 should equal 4.");
+
+  // Set a new value, then get it
+  int *new_val = DArray_new(numbers);
+  *new_val = 99;
+  DArray_set(numbers, 0, new_val);
+
+  int *el = DArray_get(numbers, 0);
+  mu_assert(*el == 99, "Element 0 should equal 99.");
+
+  // Pop off all the elements
+  for (int i = 4; i >= 0; i--) {
+    int *val = DArray_pop(numbers);
+    mu_assert(val != NULL, "Shouldn't get a NULL.");
+
+    /* printf("[%d] Value at %p is %d\n", i, val, *val); */
+    if (i == 0) {
+      mu_assert(*val == 99, "Wrong value.");
+    } else {
+      mu_assert(*val == i, "Wrong value.");
+    }
+    DArray_free(val);
+  }
+
+  DArray_clear_destroy(numbers);
+
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
@@ -121,6 +173,7 @@ char *all_tests()
   mu_run_test(test_expand_contract);
   mu_run_test(test_push_pop);
   mu_run_test(test_destroy);
+  mu_run_test(test_lifecycle);
 
   return NULL;
 }
