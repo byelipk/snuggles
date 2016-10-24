@@ -90,7 +90,6 @@ List *List_merge_sort(List * list, List_compare cmp)
     List_destroy(right);
   }
 
-  // recursion
   result = List_merge(sort_left, sort_right, cmp);
 
   List_destroy(sort_left);

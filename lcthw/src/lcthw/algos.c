@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <lcthw/algos.h>
+#include <math.h>
 
-int Int_merge(int B[], int C[], int A[], int p, int q);
 
 // Brute Force
 //
@@ -45,102 +46,115 @@ int Int_bubble_sort(int array[], int n)
   return 0;
 }
 
-// Divide And Conquer
+// ALGORITHM  Quicksort(A[l..r])
 //
-// ALGORITHM  Mergesort(A[0..n - 1])
+// Desc:  Sorts a subarray by quicksort where l is the 
+//        low index and r is the high index.
+// Input: A subarray A[l..r] of A[0..n - 1], defined by
+//        its left and right indices, l and r.
+// Output: Subarray A[l..r] sorted in nondecreasing order.
 //
-// Desc:   Sorts a given array by recursive mergesort,
-//         where n is the number of elements in the array.
-// Input:  A zero-index array of n orderable elements.
-// Output: Array A[0..n - 1] sorted in ascending order.
-//
-// if n > 1
-//    copy A[0..FLOOR(n / 2) - 1] to B[0..FLOOR(n / 2) - 1]
-//    copy A[FLOOR(n / 2)..n - 1] to C[0..FLOOR(n / 2) - 1]
-//    Mergesort(B[0..FLOOR(n/2) - 1])
-//    Mergesort(C[0..FLOOR(n/2) - 1])
-//    Merge(B, C, A)
-int Int_merge_sort(int A[], int n)
+// def Quicksort(A[l..r]) do
+//   if l < r
+//     s <- Partition(A[l..r]) // s is a split position
+//     Quicksort(A[l..s - 1])
+//     Quicksort(A[s + 1..r])
+// end
+int Int_quick_sort(int A[], int l, int r) 
 {
-  // Empty arrays and arrays with 1 element are already sorted
-  // so we return from the function here. This also helps us
-  // implement this function recursively.
-  if (n <= 1) {
-    return 0;
+  if (l < r) {
+    int s = Int_partition(A, l, r);  // find the boundary
+    Int_quick_sort(A, l, s - 1);     // quick sort left side
+    Int_quick_sort(A, s + 1, r);     // quick sort right side
   }
-
-  int p = (n / 2); // size of first half of array A
-  int q = n - p;   // size of second half of array A
-
-  int B[p]; // temp array of size p
-  int C[q]; // temp array of size q
-
-  // copy p elements from A into B
-  memcpy(B, A, (p * sizeof(int)));
-
-  // copy q elements from A into C
-  memcpy(C, &A[p], (q * sizeof(int)));
-
-  // Recursively merge array B and C
-  Int_merge_sort(B, p);
-  Int_merge_sort(C, q);
-
-  Int_merge(B, C, A, p, q);
 
   return 0;
 }
 
 
+// ALGORITHM  Partition(A[l..r])
+//
+// Desc: Partitions a subarray by using its first element as a pivot,
+//       where l is the element as index position 0 and r is the last 
+//       element in the array.
+// Input: A subarray A[l..r] of A[0..n - 1], defined by its left and right
+//        indices l and r (l < r)
+// Output: A partition of A[l..r], with the split position returned as this 
+//         function's value.
+//
+// According to the pseudo code for Partition, three situations
+// may arise after the scans stop:
+//
+// (1) If the scanning indices i and j have crossed (i < j)
+//     then we decrement i and j and resume the scans.
+//
+// (2) If the scanning indices have crossed over (i > j), we
+//     will have partitioned the array after exchanging the
+//     pivot with A[j].
+//
+// (3) If the scanning indices stop while pointing to the same element (i = j),
+//     the value they are pointing to must be equal to the pivot.
 
-// ALGORITHM  Merge(B[0..p - 1], C[0..q - 1], A[0..p + q - 1])
-//
-// Desc:   Merges two sorted arrays into one sorted array, where
-//         p is the number of elements in array B and q is the 
-//         number of elements in array C.
-//         arrays.
-// Input:  Arrays B[0..p - 1] and C[0..q - 1] both sorted
-// Output: Sorted array A[0..p + q - 1] of the elements of B and C
-//
-// i <- 0; j <- 0; k <- 0
-// while i < p and j < q do
-//     if B[i] <= C[j]
-//         A[k] = B[i]
-//         i <- i + 1
-//     else
-//         A[k] = C[j]
-//         i <- i + 1
-//
-//     k <- k + 1
-//
-// if i == p
-//     copy C[j..q - 1] to A[k..p + q - 1]
-// else
-//     copy B[i..p - 1] to A[k..p + q - 1]
-//
-int Int_merge(int B[], int C[], int A[], int p, int q)
+/* def Partition(A[l..r]) do */
+/*   p <- A[l]     // pivot (first element in A[l..r]) */
+/*   i <- l        // index i (left to right scan) */
+/*   j <- r + 1    // index j (right to left scan) */
+
+/*   repeat */
+/*     repeat i <- i + 1 until A[i] >= p */
+/*     repeat j <- j - 1 until A[j] <= p */
+/*     swap(A[i], A[j]) */  
+/*   until i >= j */  
+
+/*   swap(A[i], A[j])  // undo last swap when i >= j */
+/*   swap(A[l], A[j]) */  
+
+/*   return j */
+/* end */
+
+int Int_partition(int A[], int l, int r)
 {
-  int i = 0;
-  int j = 0;
-  int k = 0;
+  int p = A[l];
+  int i = l;
+  int j = r + 1;
 
-  while (i < p && j < q) {
-    if (B[i] <= C[j]) {
-      A[k] = B[i];
-      i = i + 1;
-    } else {
-      A[k] = C[j];
-      j = j + 1;
-    }
+  // continue scanning while i < j
+  do {
 
-    k = k + 1;
-  }
+    // scan left side until the value at A[i] is less than the pivot
+    do { i = i + 1; } while( A[i] < p );
 
+    // scan right side until the value at A[j] is greater than the pivot
+    do { j = j - 1; } while ( A[j] > p ); 
 
-  if (i == p) {
-    memcpy(&A[k], &C[j], (q * sizeof(int)));
-  } else {
-    memcpy(&A[k], &B[i], (p * sizeof(int)));
-  }
+    // perform the swap
+    Int_swap(A, i, j);
+
+  } while (i < j);
+
+  // undo last swap when i >= j
+  Int_swap(A, i, j);
+
+  // exchange pivot (p) with j to partition the array
+  Int_swap(A, l, j);
+
+  // return index position of the pivot
+  return j;
+}
+
+int Int_swap(int A[], int i, int j) 
+{
+  int temp = A[j];
+  A[j] = A[i];
+  A[i] = temp;
 
   return 0;
+}
+
+void Int_copy(int dst[], int src[], int count)
+{
+  for (int i = 0, k = count - 1; i < count; i++, k++) {
+    printf("Copying %d to %p\n", src[k], &dst[i]);
+    dst[i] = src[k]; 
+  }
 }
