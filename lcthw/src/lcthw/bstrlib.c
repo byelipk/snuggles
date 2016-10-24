@@ -22,7 +22,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <limits.h>
-#include "bstrlib.h"
+#include <lcthw/bstrlib.h>
 
 /* Optionally include a mechanism for debugging memory */
 
