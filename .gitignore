@@ -12,3 +12,4 @@ test/testunity.c.results
 *.dSym/
 lcthw/tests/tests.log
 *_tests
+lib/
