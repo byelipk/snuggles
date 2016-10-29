@@ -1,6 +1,7 @@
 #include "minunit.h"
 #include <string.h>
 #include <lcthw/darray.h>
+/* #include <lcthw/darray_algos.h> */
 
 static DArray *array = NULL;
 static int *val1 = NULL;
@@ -301,6 +302,7 @@ char *all_tests()
   mu_run_test(test_first_last);
   mu_run_test(test_end_count);
   mu_run_test(test_max);
+  /* mu_run_test(test_sorting); */
 
   return NULL;
 }
