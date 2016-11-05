@@ -73,7 +73,9 @@ char *all_tests()
   mu_run_test(test_quick_sort);
 
   // perf tests
+#if 0
   mu_run_test(test_perf_qsort);
+#endif
 
   return NULL;
 }

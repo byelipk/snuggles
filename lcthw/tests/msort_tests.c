@@ -69,7 +69,9 @@ char *all_tests()
   mu_run_test(test_merge_sort);
 
   // perf tests
+#if 0
   mu_run_test(test_perf_msort);
+#endif
 
   return NULL;
 }
