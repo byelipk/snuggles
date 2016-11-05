@@ -9,18 +9,13 @@
 typedef int (*Hashmap_compare)(void *a, void *b);
 typedef uint32_t (*Hashmap_hash)(void *key);
 
+// A Hashmap can contain any number of HashmapNodes.
+// The nodes are stored in buckets, a type of DArray
+// that holds HashmapNode key/value pairs.
 typedef struct Hashmap {
-  // A dynamic array that will be set to a fixed size of 100 buckets.
-  // Each bucket will contain a DArray that will hold HashmapNodes.
-  DArray *buckets;
-
-  // This is a comparison function the hashmap uses to find elements
-  // by their key. 
-  Hashmap_compare compare;
-
-  // This is the hashing function, and it is responsible for taking your key,
-  // processing its contents, and producing a single uint32_t index number.
-  Hashmap_hash hash;
+  DArray *buckets;         // two-level map of nodes
+  Hashmap_compare compare; // comparison function
+  Hashmap_hash hash;       // hashing function
 } Hashmap;
 
 typedef struct HashmapNode {

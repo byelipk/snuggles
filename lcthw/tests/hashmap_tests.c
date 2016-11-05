@@ -108,6 +108,15 @@ char *test_delete()
   return NULL;
 }
 
+char *test_create_destroy()
+{
+  // Creating a hashmap requires a comparison function 
+  // and hashing function.
+  Hashmap *map = Hashmap_create(NULL, NULL);
+  Hashmap_destroy(map);
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
@@ -117,6 +126,9 @@ char *all_tests()
   mu_run_test(test_traverse);
   mu_run_test(test_delete);
   mu_run_test(test_destroy);
+
+  // my tests
+  mu_run_test(test_create_destroy);
 
   return NULL;
 }

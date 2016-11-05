@@ -281,6 +281,32 @@ char *test_max()
   return NULL;
 }
 
+char *test_multidimensional_array()
+{
+  // create a darray wrapper
+  DArray *A = DArray_create(sizeof(DArray *), 1);
+
+  // Create a new element for A
+  DArray *B = DArray_new(A);
+
+  // set value of new element
+  B = DArray_create(sizeof(int), 10);
+
+  int *i = DArray_new(B); // Create a new element for B
+  *i = 29;                // set value of new element
+  DArray_push(B, i);      // push memory address of value into array
+  DArray_push(A, B);      // push array into array wrapper
+
+  mu_assert(DArray_max(A) == 301, "Expected 301.");
+  mu_assert(DArray_get(A, 0) == B, "Expected B to be at position 0.");
+  mu_assert(DArray_pop(DArray_get(A, 0)) == i, "Expected 29.");
+
+  DArray_destroy(B);
+  DArray_destroy(A);
+
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
@@ -302,6 +328,7 @@ char *all_tests()
   mu_run_test(test_first_last);
   mu_run_test(test_end_count);
   mu_run_test(test_max);
+  mu_run_test(test_multidimensional_array);
   /* mu_run_test(test_sorting); */
 
   return NULL;
