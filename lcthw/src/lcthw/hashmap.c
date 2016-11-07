@@ -34,20 +34,21 @@ static uint32_t default_hash(void *a)
 Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash)
 {
   Hashmap *map = calloc(1, sizeof(Hashmap));
-  check_mem(map);
 
+  check_mem(map); // make sure we have a map
+
+  // initialize map
   map->compare = compare == NULL ? default_comapre : compare;
   map->hash    = hash    == NULL ? default_hash    : hash;
   map->buckets = DArray_create(sizeof(DArray *), DEFAULT_NUMBER_OF_BUCKETS);
-  map->buckets->end = map->buckets->max;  // fake out expanding it
 
-  check_mem(map);
+  check_mem(map->buckets); // make sure we have buckets
+
+  map->buckets->end = map->buckets->max;  // fake out expanding it
 
   return map;
 error:
-  if (map) {
-    Hashmap_destroy(map);
-  }
+  if (map) { Hashmap_destroy(map); }
 
   return NULL;
 }
@@ -63,12 +64,12 @@ void Hashmap_destroy(Hashmap *map)
         DArray *bucket = DArray_get(map->buckets, i);
         if (bucket) {
           for (j = 0; j < DArray_count(bucket); j++) {
-            free(DArray_get(bucket, j));
+            free(DArray_get(bucket, j)); // free each element in array
           }
-          DArray_destroy(bucket);
+          DArray_destroy(bucket); // free array structure
         }
       }
-      DArray_destroy(map->buckets);
+      DArray_destroy(map->buckets); // free array structure
     }
     free(map);
   }
@@ -89,20 +90,22 @@ error:
   return NULL;
 }
 
-static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key, 
+static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key,
     int create, uint32_t * hash_out)
 {
+  check(map != NULL, "Invalid map given.");
   uint32_t hash = map->hash(key);
+
   int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;
   check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
 
   // store it for the return so the caller can use it
   *hash_out = hash;
-  
+
   DArray *bucket = DArray_get(map->buckets, bucket_n);
 
+  // If we don't have a bucket, we need to make it!
   if (!bucket && create) {
-    // new bucket, set it up
     bucket = DArray_create(
         sizeof(void *), DEFAULT_NUMBER_OF_BUCKETS);
     check_mem(bucket);
@@ -134,20 +137,24 @@ error:
 
 static inline int Hashmap_get_node(Hashmap *map, uint32_t hash, DArray *bucket, void *key)
 {
+  check(map != NULL, "Invalid map.");
+  check(bucket != NULL, "Invalid bucket.");
+
   int i = 0;
 
   for (i = 0; i < DArray_end(bucket); i++) {
-    debug("TRY: %d", i);
     HashmapNode *node = DArray_get(bucket, i);
+    check(node != NULL, "Should get node from bucket.");
     if (node->hash == hash && map->compare(node->key, key) == 0) {
       return i;
     }
   }
 
+error: // fallthrough
   return -1;
 }
 
-void *Hashmap_get(Hashmap *map, void *key) 
+void *Hashmap_get(Hashmap *map, void *key)
 {
   uint32_t hash = 0;
   DArray *bucket = Hashmap_find_bucket(map, key, 0, &hash);
@@ -157,7 +164,8 @@ void *Hashmap_get(Hashmap *map, void *key)
   if (i == -1) { return NULL; }
 
   HashmapNode *node = DArray_get(bucket, i);
-  check(node != NULL, "Failed to get node from bucket when it should exist.");
+  check(node != NULL,
+    "Failed to get node from bucket when it should exist.");
 
   return node->data;
 
@@ -183,7 +191,7 @@ int Hashmap_traverse(Hashmap *map, Hashmap_traverse_cb traverse_cb)
       }
     }
   }
-  
+
   return 0;
 }
 
@@ -213,4 +221,3 @@ void *Hashmap_delete(Hashmap *map, void *key)
 
   return data;
 }
-
