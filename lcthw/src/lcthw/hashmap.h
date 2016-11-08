@@ -20,7 +20,7 @@ typedef struct Hashmap {
 
 typedef struct HashmapNode {
   void *key;     // key for the {key: value} pair
-  void *data;    // The value
+  void *data;    // data is a pointer to some value
   uint32_t hash; // The hash makes finding the node quicker
 } HashmapNode;
 
