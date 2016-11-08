@@ -117,6 +117,25 @@ char *test_create_destroy()
   return NULL;
 }
 
+char *test_works_with_char_values()
+{
+  Hashmap *map = Hashmap_create(NULL, NULL);
+  mu_assert(map != NULL, "Hashmap_create failed.");
+
+  char *key = "key";
+  char value = 'A';
+
+  int rc = Hashmap_set(map, &key, &value);
+  mu_assert(rc == 0, "Hashmap_set failed.");
+
+  char *result = Hashmap_get(map, &key);
+  mu_assert(*result == value, "Wrong value for key.");
+
+  Hashmap_destroy(map);
+
+  return NULL;
+}
+
 char *test_works_with_int_values()
 {
   Hashmap *map = Hashmap_create(NULL, NULL);
@@ -128,11 +147,10 @@ char *test_works_with_int_values()
   int rc = Hashmap_set(map, &key, &value);
   mu_assert(rc == 0, "Hashmap_set failed.");
 
-  // printf("%p -> %p -> %s\n", &key, key, key);
-  // printf("%p -> 0x%08x -> %d\n", &value, value, value);
+  printf("%p -> 0x%08x -> %d\n", &value, value, value);
 
   int *result = Hashmap_get(map, &key);
-  // printf("%p -> 0x%08x -> %d\n", &result, *result, *result);
+  printf("%p -> 0x%08x -> %d\n", &result, *result, *result);
 
   mu_assert(*result == value, "Wrong value for key.");
 
@@ -225,6 +243,7 @@ char *all_tests()
 
   // my tests
   mu_run_test(test_create_destroy);
+  mu_run_test(test_works_with_char_values);
   mu_run_test(test_works_with_int_values);
   mu_run_test(test_works_with_float_values);
   mu_run_test(test_works_with_values_of_different_types);
