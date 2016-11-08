@@ -28,7 +28,7 @@ int List_sequential_search_sorted(int list[], int size, int key)
   int r = size;
   Int_quick_sort(list, l, r - 1);
 
-  // iterate until we find element less than for equal to the key
+  // iterate until we find element less than or equal to the key
   int i = 0;
   while (list[i] < key) {
     i += 1;
