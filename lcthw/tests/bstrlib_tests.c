@@ -6,9 +6,19 @@
 
 char *test_bfromcstr()
 {
+  struct tagbstring *a = bfromcstr("Holy cow!");
   bstring b = bfromcstr("Hello, BSTRING!");
 
-  printf("%s\n", b->data);
+  // printf("[bstr] %p\n", a);
+  // printf("%s\n", a->data);
+
+  // printf("[bstr] %p\n", b);
+  // printf("%s\n", b->data);
+  mu_assert(a->data != NULL, "Data (A) was NULL.");
+  mu_assert(b->data != NULL, "Data (B) was NULL.");
+
+  bdestroy(a);
+  bdestroy(b);
 
   return NULL;
 }
