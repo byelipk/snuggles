@@ -20,6 +20,7 @@ DArray *DArray_create(size_t element_size, size_t initial_max)
 
 error:
   DArray_destroy(array);
+
   return NULL;
 }
 
@@ -48,7 +49,7 @@ int DArray_expand(DArray * array)
   check(array != NULL, "Invalid array.");
 
   size_t old_max = array->max;
-  check(DArray_resize(array, array->max + array->expand_rate) == 0, 
+  check(DArray_resize(array, array->max + array->expand_rate) == 0,
       "Failed to expand array to new size: %d", array->max + (int)array->expand_rate);
 
   memset(array->contents + old_max, 0, array->expand_rate + 1);
@@ -62,12 +63,10 @@ error:
 int DArray_contract(DArray * array)
 {
   check(array != NULL, "Invalid array.");
-
-  int new_size = array->end < (int)array->expand_rate ? 
+  int new_size = array->end < (int)array->expand_rate ?
     (int)array->expand_rate : array->end;
 
   return DArray_resize(array, new_size + 1);
-
 error:
   return -1;
 }
@@ -75,13 +74,18 @@ error:
 void DArray_clear(DArray * array)
 {
   int i = 0;
-  if (array && array->element_size > 0) {
+  check(array != NULL, "Invalid array.");
+
+  if (array->element_size > 0) {
     for (i = 0; i < array->max; i++) {
       if (array->contents[i] != NULL) {
         free(array->contents[i]);
       }
     }
   }
+
+error:
+  return;
 }
 
 void DArray_destroy(DArray * array)
@@ -96,8 +100,11 @@ void DArray_destroy(DArray * array)
 
 void DArray_clear_destroy(DArray * array)
 {
+  check(array != NULL, "Invalid array.");
   DArray_clear(array);
   DArray_destroy(array);
+error: // fallthrough
+  return;
 }
 
 int DArray_push(DArray * array, void *el)
@@ -125,13 +132,12 @@ void *DArray_pop(DArray * array)
   void *el = DArray_remove(array, array->end - 1);
   array->end--;
 
-  if (DArray_end(array) > (int)array->expand_rate 
+  if (DArray_end(array) > (int)array->expand_rate
       && DArray_end(array) % array->expand_rate) {
-    DArray_contract(array);
+    check(DArray_contract(array) != -1, "Failed to contact.");
   }
 
   return el;
-
 error:
   return NULL;
 }

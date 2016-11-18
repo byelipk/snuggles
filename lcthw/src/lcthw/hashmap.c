@@ -127,7 +127,8 @@ int Hashmap_set(Hashmap *map, void *key, void *data)
   HashmapNode *node = Hashmap_node_create(hash, key, data);
   check_mem(node);
 
-  DArray_push(bucket, node);
+  int rc = DArray_push(bucket, node);
+  check(rc != -1, "Failed to push node onto bucket.");
 
   return 0;
 

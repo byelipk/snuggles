@@ -73,16 +73,19 @@ char *test_remove()
 char *test_expand_contract()
 {
   int old_max = array->max;
+  int rc = 0;
 
   DArray_expand(array);
   mu_assert((unsigned int)array->max == old_max + array->expand_rate,
       "Wrong size after expand.");
 
-  DArray_contract(array);
+  rc = DArray_contract(array);
+  mu_assert(rc != -1, "Failed to contact array.");
   mu_assert((unsigned int)array->max == array->expand_rate + 1,
       "Should stay at the expand_rate at least.");
 
-  DArray_contract(array);
+  rc = DArray_contract(array);
+  mu_assert(rc != -1, "Failed to contact array.");
   mu_assert((unsigned int)array->max == array->expand_rate + 1,
       "Should stay at the expand_rate at least.");
 
@@ -174,7 +177,7 @@ char *test_can_handle_strings()
   char *el1 = DArray_new(strings);
   char *el2 = DArray_new(strings);
 
-  // Set values of new array elements 
+  // Set values of new array elements
   el1 = str1;
   el2 = str2;
 

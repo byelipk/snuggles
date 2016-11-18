@@ -4,9 +4,9 @@
 #include <lcthw/darray.h>
 #include "minunit.h"
 
-struct tagbstring test1 = bsStatic("test data 1"); 
-struct tagbstring test2 = bsStatic("test data 2"); 
-struct tagbstring test3 = bsStatic("test data 3"); 
+struct tagbstring test1 = bsStatic("test data 1");
+struct tagbstring test2 = bsStatic("test data 2");
+struct tagbstring test3 = bsStatic("test data 3");
 
 char *test_fnv1a()
 {
@@ -69,10 +69,11 @@ int gen_keys(DArray * keys, int num_keys)
 
   // FNV1a histogram
   for (i = 0; i < num_keys; i++) {
-   rc = bsread(key, stream, BUFFER_LEN); 
+   rc = bsread(key, stream, BUFFER_LEN);
    check(rc >= 0, "Failed to read from /dev/urandom.");
 
-   DArray_push(keys, bstrcpy(key));
+   rc = DArray_push(keys, bstrcpy(key));
+   check(rc != -1, "Failed to push key onto array.");
   }
 
   bsclose(stream);
@@ -109,8 +110,8 @@ char *test_distribution()
   int i = 0;
   int stats[3][BUCKETS] = { {0} };
   DArray *keys = DArray_create(0, NUM_KEYS);
-  
-  mu_assert(gen_keys(keys, NUM_KEYS) == 0, 
+
+  mu_assert(gen_keys(keys, NUM_KEYS) == 0,
       "Failed to generate random keys.");
 
   fill_distribution(stats[ALGO_FNV1A], keys, Hashmap_fnv1a_hash);
@@ -120,7 +121,7 @@ char *test_distribution()
   fprintf(stderr, "FNV\tA32\tDJB\n");
 
   for (i = 0; i < BUCKETS; i++) {
-    fprintf(stderr, "%d\t%d\t%d\n", 
+    fprintf(stderr, "%d\t%d\t%d\n",
         stats[ALGO_FNV1A][i],
         stats[ALGO_ADLER32][i],
         stats[ALGO_DJB][i]);

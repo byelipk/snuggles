@@ -36,6 +36,10 @@ void DArray_clear_destroy(DArray * array);
 
 #define DEFAULT_EXPAND_RATE 300
 
+// NOTE
+// If you need to create a block of code for a macro and you don't need
+// code generation, use a `static inline` function.
+
 static inline void DArray_set(DArray * array, int i, void * el)
 {
   check(array != NULL, "Invalid array.");
@@ -57,7 +61,7 @@ static inline void *DArray_get(DArray * array, int i)
   check(i < array->max, "DArray attempt to get past max.");
 
   return array->contents[i];
-error: 
+error:
   return NULL;
 }
 
@@ -70,7 +74,7 @@ static inline void *DArray_remove(DArray * array, int i)
   array->contents[i] = NULL;
 
   return el;
-error: 
+error:
   return NULL;
 }
 
@@ -81,7 +85,7 @@ static inline void *DArray_new(DArray * array)
 
   return calloc(1, array->element_size);
 
-error: 
+error:
   return NULL;
 }
 
