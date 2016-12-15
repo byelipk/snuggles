@@ -13,11 +13,24 @@ char *test_seq_search()
   return NULL;
 }
 
+char *test_seq_search_no_match()
+{
+  char *string = "Hello";
+  char *pattern = "nice";
+
+  int result = String_sequential_search(string, pattern);
+
+  mu_assert(result == -1, "Expected no match, but there was a match.");
+
+  return NULL;
+}
+
 char *all_tests()
 {
   mu_suite_start();
 
   mu_run_test(test_seq_search);
+  mu_run_test(test_seq_search_no_match);
 
   return NULL;
 }
